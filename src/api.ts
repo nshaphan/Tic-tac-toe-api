@@ -6,6 +6,11 @@ const gameController = (req: Request, res: Response) => {
     const ticTacToe = new TicTacToe();
     const { board } = req.query;
 
+    if (!board) {
+        res.status(400).send("Missing the board parameter");
+        return;
+    }
+
     try {
         ticTacToe.decodeBoard(board as string);
     } catch (e) {
